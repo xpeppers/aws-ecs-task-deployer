@@ -1,0 +1,11 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - apt-get update -y
+      - apt-get install -y jq
+      - read DOCKER_NEW_IMG_TAG < ${FILE_ARTIFACT-ARTIFACT}
+  build:
+    commands:
+      - /bin/bash ./update-task.sh
