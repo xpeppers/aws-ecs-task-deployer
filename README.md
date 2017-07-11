@@ -1,4 +1,4 @@
-# aws-ecs-task-deployer
+# Simplifying the deploy on AWS ECS.
 
 This script updates the ECS Service with a new Container Image version.
 
@@ -13,12 +13,32 @@ You have to istall `jq` and `/bin/bash`.
 
 ## Use it in your pipeline
 
+
+1. Get the script:
+
+```
+curl https://raw.githubusercontent.com/xpeppers/aws-ecs-task-deployer/master/update-task.sh > update-task.sh
+```
+
+2. Set the Env vars:
+
+```
 export CLUSTER="your_cluster_name" \
    && export SERVICE="your_service_name"  \
    && export AWS_DEFAULT_REGION="eu-west-1" \
-   && export CONTAINER_NAMES_REGEX='web-app' \
-   && export DOCKER_NEW_IMG_TAG=`git log --pretty=format:'%h' -n 1`
-   && /bin/bash ./update-task.sh
+   && export CONTAINER_NAMES_REGEX='web-app' 
+```
+3. Get the Already Pushed Image Registry
+
+```
+export DOCKER_NEW_IMG_TAG=`git log --pretty=format:'%h' -n 1`
+```   
+   
+4. Deploy!
+
+```
+/bin/bash ./update-task.sh
+```
 
 ## Usage example:
 
